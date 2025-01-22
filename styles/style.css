@@ -11,7 +11,9 @@
     --blue-light: #04d4d3;
     --blue-dark: #2a73c2;
     --green: #61e366;
+    --light-green: #95eb98;
     --red: #d5707a;
+    --light-red: #e99ea6;
     --grey: #94a098;
 }
 
@@ -21,11 +23,6 @@ body{
     height: 100vh;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-}
-
-.dark{
-    background-color: var(--black);
-    color: var(--white);
 }
 
 /**/
@@ -81,6 +78,7 @@ body{
 
 .agregar-tarea .boton:hover{
     cursor: pointer;
+    background-color: var(--light-green);
 }
 
 .agregar-tarea input::placeholder{
@@ -130,9 +128,22 @@ body{
     color: var(--grey);
 }
 
-.dark{
-    background-color: var(--black) !important;
-    color: var(--white);
-    border: 2px solid var(--grey);
-    box-shadow: 0 4px var(--grey);
+button{
+    margin: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.delete-button{
+    background-color: var(--red);
+    border: 2px solid var(--black);
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.delete-button:hover{
+    background-color: var(--light-red);
 }
