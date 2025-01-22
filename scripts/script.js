@@ -128,3 +128,19 @@ function cargarLista(DATA){
     })
 
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("username")
+    if (!username) {
+      window.location.href = "index.html"; // Redirige al inicio de sesión si no hay usuario
+    } else {
+      document.getElementById("username").textContent = username;
+    }
+}
+)
+
+document.getElementById("clearStorageButton").addEventListener("click", () => {
+    localStorage.clear(); // Borra todos los datos del localStorage
+    alert("Se han eliminado los datos del usuario.");
+    window.location.href = "inicio-sesion.html"; // Redirige al inicio de sesión
+  });
