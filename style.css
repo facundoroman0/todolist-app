@@ -5,17 +5,27 @@
 }
 
 :root {
-    --white: #fafafb;
+    --white: #fbfaff;
+    --black: #1f1f1f;
     --purple: #9a67ea;
     --blue-light: #04d4d3;
     --blue-dark: #2a73c2;
-    --green: #2c7b90;
+    --green: #61e366;
+    --red: #d5707a;
+    --grey: #94a098;
 }
 
 body{
-    background: linear-gradient(to bottom, var(--purple), var(--blue-light));
+    background: var(--white);
+    color: var(--black);
     height: 100vh;
-    font-family: 'Geo', sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+.dark{
+    background-color: var(--black);
+    color: var(--white);
 }
 
 /**/
@@ -28,71 +38,77 @@ body{
 
 /* P E R F I L */
 .perfil h1{
-    color: var(--white);
-}
-
-.perfil span{
-    color: var(--white);
-    letter-spacing: 1px;
+    font-family: 'Space Mono', sans-serif;
 }
 
 .fecha{
-    color: var(--white);
     padding: 50px 0 5px 0;
 }
 
 /* A G R E G A R  T A R E A */
 .agregar-tarea{
-    background-color: var(--white);
+    border: 2px solid var(--black);
     width: 100%;
-    height: 50px;
     display: flex;
     align-items: center;
+    flex-direction: column;
     padding: 10px;
-    gap: 50px;
+    gap: 20px;
     margin: 40px 0;
     border-radius: 10px;
+    box-shadow: 0 4px var(--black);
 }
 
 .agregar-tarea input{
+    background-color: var(--white);
     width: 100%;
-    height: 100%;
+    height: 40px;
+    padding: 0 10px;
     border-radius: 8px;
-    border: none;
+    border: 2px solid var(--black);
     outline: none;
 }
 
-.agregar-tarea i{
-    font-size: 2em;
-    color: var(--purple);
-
+.agregar-tarea .boton{
+    width: 100px;
+    height: 40px;
+    color: var(--black);
+    background-color: var(--green);
+    border-radius: 50px;
+    font-size: 1rem;
+    align-self: flex-end;
 }
 
-.agregar-tarea i:hover{
-    transform: scale(1.1);
+.agregar-tarea .boton:hover{
     cursor: pointer;
 }
 
 .agregar-tarea input::placeholder{
     font-size: 1.1rem;
-    color: var(--purple);
+    color: var(--grey);
 }
 
 /* S E C C I O N  T A R E A */
 .seccion-tarea h3{
-    color: var(--white);
     margin-bottom: 20px;
 }
 
 .seccion-tarea li{
     display: flex;
-    background: linear-gradient(to bottom, var(--blue-dark), var(--green));
-    border-radius: 15px;
+    background-color: var(--white);
+    border-radius: 10px;
+    border: 2px solid var(--black);
     padding: 10px;
     align-items: center;
     justify-content: space-between;
-    margin: 5px 0;
-    color: var(--white);
+    margin: 15px 0;
+    color: var(--black);
+    box-shadow: 0 4px var(--black);
+}
+
+.seccion-tarea img{
+    width: 25px;
+    cursor: pointer;
 }
 
 .seccion-tarea i{
@@ -100,15 +116,25 @@ body{
 }
 
 .seccion-tarea i:hover{
-    color: var(--blue-light);
+    color: var(--green);
     cursor: pointer;
 }
 
-.seccion-tarea > ul p{
-    font-size: 1.2rem;
+.seccion-tarea p + i:hover{
+    color: var(--red);
+    cursor: pointer;
 }
 
 .line-through{
     text-decoration: line-through;
-    color: var(--blue-light);
+    color: var(--grey);
+}
+
+.dark{
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.dark-container{
+    
 }

@@ -2,8 +2,9 @@ const fecha = document.querySelector('#fecha')
 const lista = document.querySelector('#lista')
 const input = document.querySelector('#input')
 const botonEnter = document.querySelector('#enter')
-const check='fa-check-circle'
-const uncheck='fa-circle'
+const titulo = document.getElementById('titulo-tareas')
+const check='bi-check-circle'
+const uncheck='bi-circle'
 const lineThrough='line-through'
 let id
 let LIST
@@ -15,6 +16,10 @@ let LIST
 const FECHA = new Date() 
 fecha.innerHTML=FECHA.toLocaleDateString('es-MX', {weekday: 'long', month: 'long', day: 'numeric'})
 
+if(document.getElementById('elemento')==null){
+    titulo.textContent="Sin tareas pendientes"
+}
+
 // Funcion agregar tarea
 function agregarTarea(tarea, id, realizado, eliminado){
 
@@ -22,19 +27,21 @@ function agregarTarea(tarea, id, realizado, eliminado){
 
     const REALIZADO = realizado ?check :uncheck
     const LINE = realizado ?lineThrough :''
-
+    // <i class="fas fa-trash de" data="eliminado" id="${id}"></i>
+    // <i class="fas ${REALIZADO}" data="realizado" id="${id}"></i>
     const elemento = `<li id="elemento">
-                        <i class="fas ${REALIZADO}" data="realizado" id="${id}"></i>
+                        <i class="bi ${REALIZADO}" data="realizado" id="${id}"></i>
                         <p class="text ${LINE}">${tarea}</p>
-                        <i class="fas fa-trash de" data="eliminado" id="${id}"></i>
+                        <i class="bi bi-trash" data="eliminado" id="${id}"></i>
                       </li>`
     lista.insertAdjacentHTML("afterbegin",elemento)
-
-
 }
 
 
 botonEnter.addEventListener('click',()=> {
+
+    titulo.textContent = 'Estas son tus tareas pendientes'
+
     const tarea = input.value
     if(tarea) { //existe la tarea?
         agregarTarea(tarea, id, false, false)
@@ -87,10 +94,6 @@ lista.addEventListener('click', function(event){
     const element = event.target
     const elementData = element.attributes.data.value
 
-//     console.log(element)
-//     console.log(element.attributes)
-//     console.log(element.attributes.data)
-//     console.log(element.attributes.data.value)
     if(elementData=='realizado'){
         tareaRealizada(element)
     }
