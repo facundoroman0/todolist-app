@@ -131,10 +131,8 @@ body{
 }
 
 .dark{
-    background-color: var(--black);
+    background-color: var(--black) !important;
     color: var(--white);
-}
-
-.dark-container{
-    
+    border: 2px solid var(--grey);
+    box-shadow: 0 4px var(--grey);
 }

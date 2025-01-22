@@ -16,9 +16,9 @@ let LIST
 const FECHA = new Date() 
 fecha.innerHTML=FECHA.toLocaleDateString('es-MX', {weekday: 'long', month: 'long', day: 'numeric'})
 
-if(document.getElementById('elemento')==null){
-    titulo.textContent="Sin tareas pendientes"
-}
+// if(document.getElementById('elemento')==null){
+//     titulo.textContent="Sin tareas pendientes"
+// }
 
 // Funcion agregar tarea
 function agregarTarea(tarea, id, realizado, eliminado){
@@ -88,6 +88,7 @@ function tareaRealizada(element){
 function tareaEliminada(element){
     element.parentNode.parentNode.removeChild(element.parentNode)
     LIST[element.id].eliminado = true
+
 }
 
 lista.addEventListener('click', function(event){
@@ -101,6 +102,10 @@ lista.addEventListener('click', function(event){
         tareaEliminada(element)
     }
     localStorage.setItem('TODO',JSON.stringify(LIST))
+
+    if(document.getElementById('elemento')==null){
+        titulo.textContent="Sin tareas pendientes"
+    }
 
 })
 
