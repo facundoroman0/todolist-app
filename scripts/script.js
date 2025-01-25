@@ -3,44 +3,44 @@ const lista = document.querySelector('#lista')
 const input = document.querySelector('#input')
 const botonEnter = document.querySelector('#enter')
 const titulo = document.getElementById('titulo-tareas')
-const check='bi-check-circle'
-const uncheck='bi-circle'
-const lineThrough='line-through'
+const check = 'bi-check-circle'
+const uncheck = 'bi-circle'
+const lineThrough = 'line-through'
 let id
 let LIST
 
 
-if(document.getElementById('elemento')==null){
-    titulo.textContent="Sin tareas pendientes"
+if (document.getElementById('elemento') == null) {
+    titulo.textContent = "Sin tareas pendientes"
 }
-// Agregar la fecha actual
-const FECHA = new Date() 
-fecha.innerHTML=FECHA.toLocaleDateString('es-MX', {weekday: 'long', month: 'long', day: 'numeric'})
 
-// Funcion agregar tarea
-function agregarTarea(tarea, id, realizado, eliminado){
+const FECHA = new Date()
+fecha.innerHTML = FECHA.toLocaleDateString('es-MX', { weekday: 'long', month: 'long', day: 'numeric' })
 
-    if(eliminado){return}
 
-    const REALIZADO = realizado ?check :uncheck
-    const LINE = realizado ?lineThrough :''
+function agregarTarea(tarea, id, realizado, eliminado) {
+
+    if (eliminado) { return }
+
+    const REALIZADO = realizado ? check : uncheck
+    const LINE = realizado ? lineThrough : ''
 
     const elemento = `<li id="elemento">
                         <i class="bi ${REALIZADO}" data="realizado" id="${id}"></i>
                         <p class="text ${LINE}">${tarea}</p>
                         <i class="bi bi-trash" data="eliminado" id="${id}"></i>
                       </li>`
-    lista.insertAdjacentHTML("afterbegin",elemento)
+    lista.insertAdjacentHTML("afterbegin", elemento)
 }
 
 
-botonEnter.addEventListener('click',()=> {
+botonEnter.addEventListener('click', () => {
 
     titulo.textContent = 'Estas son tus tareas pendientes'
 
     const tarea = input.value
 
-    if(tarea) { //existe la tarea?
+    if (tarea) {
         agregarTarea(tarea, id, false, false)
         LIST.push({
             nombre: tarea,
@@ -49,17 +49,17 @@ botonEnter.addEventListener('click',()=> {
             eliminado: false,
         })
     }
-    localStorage.setItem('TODO',JSON.stringify(LIST))
-    input.value=''
+    localStorage.setItem('TODO', JSON.stringify(LIST))
+    input.value = ''
     id++
-    
-}) 
 
-document.addEventListener('keyup', function(event){
+})
 
-    if(event.key=='Enter'){
+document.addEventListener('keyup', function (event) {
+
+    if (event.key == 'Enter') {
         const tarea = input.value
-        if(tarea) { //existe la tarea?
+        if (tarea) {
             agregarTarea(tarea, id, false, false)
             titulo.textContent = 'Estas son tus tareas pendientes'
             LIST.push({
@@ -68,64 +68,59 @@ document.addEventListener('keyup', function(event){
                 realizado: false,
                 eliminado: false,
             })
-            localStorage.setItem('TODO',JSON.stringify(LIST))
-            input.value=''
+            localStorage.setItem('TODO', JSON.stringify(LIST))
+            input.value = ''
             id++
-        }  
-        
+        }
+
     }
 })
 
-// Funcion tarea Realizada
-function tareaRealizada(element){
+function tareaRealizada(element) {
     element.classList.toggle(check)
     element.classList.toggle(uncheck)
-    element.parentNode.querySelector('.text').classList.toggle(lineThrough) //Del elemento traido, ve al padre y accede a la clase .text mediante el querySelector
-    LIST[element.id].realizado = LIST[element.id].realizado ?false :true
+    element.parentNode.querySelector('.text').classList.toggle(lineThrough)
+    LIST[element.id].realizado = LIST[element.id].realizado ? false : true
 }
 
-function tareaEliminada(element){
+function tareaEliminada(element) {
     element.parentNode.parentNode.removeChild(element.parentNode)
     LIST[element.id].eliminado = true
-
 }
 
-lista.addEventListener('click', function(event){
+lista.addEventListener('click', function (event) {
     const element = event.target
     const elementData = element.attributes.data.value
 
-    if(elementData=='realizado'){
+    if (elementData == 'realizado') {
         tareaRealizada(element)
     }
-    else if(elementData=='eliminado'){
+    else if (elementData == 'eliminado') {
         tareaEliminada(element)
     }
-    localStorage.setItem('TODO',JSON.stringify(LIST))
+    localStorage.setItem('TODO', JSON.stringify(LIST))
 
-    if(document.getElementById('elemento')==null){
-        titulo.textContent="Sin tareas pendientes"
+    if (document.getElementById('elemento') == null) {
+        titulo.textContent = "Sin tareas pendientes"
     }
 
 })
 
-
-// local storage get item
-
 let data = localStorage.getItem('TODO')
-if(data){
+if (data) {
     titulo.textContent = 'Estas son tus tareas pendientes'
-    LIST=JSON.parse(data)
-    id=LIST.length
+    LIST = JSON.parse(data)
+    id = LIST.length
     cargarLista(LIST)
 
-}else{
+} else {
     titulo.textContent = 'Sin tareas pendientes'
     LIST = []
     id = 0
 }
 
-function cargarLista(DATA){
-    DATA.forEach(function(i){
+function cargarLista(DATA) {
+    DATA.forEach(function (i) {
         agregarTarea(i.nombre, i.id, i.realizado, i.eliminado)
     })
 
@@ -134,15 +129,15 @@ function cargarLista(DATA){
 document.addEventListener("DOMContentLoaded", () => {
     const username = localStorage.getItem("username")
     if (!username) {
-      window.location.href = "index.html"; // Redirige al inicio de sesión si no hay usuario
+        window.location.href = "index.html";
     } else {
-      document.getElementById("username").textContent = username;
+        document.getElementById("username").textContent = username;
     }
 }
 )
 
 document.getElementById("clearStorageButton").addEventListener("click", () => {
-    localStorage.clear(); // Borra todos los datos del localStorage
+    localStorage.clear();
     alert("Se han eliminado los datos del usuario.");
-    window.location.href = "inicio-sesion.html"; // Redirige al inicio de sesión
-  });
+    window.location.href = "inicio-sesion.html";
+});
