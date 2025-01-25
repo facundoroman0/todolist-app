@@ -1,3 +1,11 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("username");
+    if (!username) {
+      window.location.href = "index.html";
+    }
+  });
+  
+
 const fecha = document.querySelector('#fecha')
 const lista = document.querySelector('#lista')
 const input = document.querySelector('#input')
