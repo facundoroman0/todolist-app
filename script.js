@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const storedName = localStorage.getItem("username");
     if (storedName) {
-      window.location.href = "index.html"; 
+      window.location.href = "app/index.html"; 
     }
 
     const loginForm = document.getElementById("loginForm");
@@ -9,6 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const username = document.getElementById("username").value;
       localStorage.setItem("username", username);
-      window.location.href = "index.html"; 
+      window.location.href = "app/index.html"; 
     });
   });

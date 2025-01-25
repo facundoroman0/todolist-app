@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const username = localStorage.getItem("username");
     if (!username) {
-      window.location.href = "index.html";
+      window.location.href = "./index.html";
     }
   });
   
@@ -137,7 +137,7 @@ function cargarLista(DATA) {
 document.addEventListener("DOMContentLoaded", () => {
     const username = localStorage.getItem("username")
     if (!username) {
-        window.location.href = "index.html";
+        window.location.href = "../index.html";
     } else {
         document.getElementById("username").textContent = username;
     }
@@ -147,5 +147,5 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("clearStorageButton").addEventListener("click", () => {
     localStorage.clear();
     alert("Se han eliminado los datos del usuario.");
-    window.location.href = "inicio-sesion.html";
+    window.location.href = "../index.html";
 });
