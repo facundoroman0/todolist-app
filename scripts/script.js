@@ -9,16 +9,13 @@ const lineThrough='line-through'
 let id
 let LIST
 
-// Local Storage : almacena la info cuando cierro el navegador
-// Sesion Storage: se pierde la info cuando cierro el navegador
 
+if(document.getElementById('elemento')==null){
+    titulo.textContent="Sin tareas pendientes"
+}
 // Agregar la fecha actual
 const FECHA = new Date() 
 fecha.innerHTML=FECHA.toLocaleDateString('es-MX', {weekday: 'long', month: 'long', day: 'numeric'})
-
-// if(document.getElementById('elemento')==null){
-//     titulo.textContent="Sin tareas pendientes"
-// }
 
 // Funcion agregar tarea
 function agregarTarea(tarea, id, realizado, eliminado){
@@ -27,8 +24,7 @@ function agregarTarea(tarea, id, realizado, eliminado){
 
     const REALIZADO = realizado ?check :uncheck
     const LINE = realizado ?lineThrough :''
-    // <i class="fas fa-trash de" data="eliminado" id="${id}"></i>
-    // <i class="fas ${REALIZADO}" data="realizado" id="${id}"></i>
+
     const elemento = `<li id="elemento">
                         <i class="bi ${REALIZADO}" data="realizado" id="${id}"></i>
                         <p class="text ${LINE}">${tarea}</p>
@@ -43,6 +39,7 @@ botonEnter.addEventListener('click',()=> {
     titulo.textContent = 'Estas son tus tareas pendientes'
 
     const tarea = input.value
+
     if(tarea) { //existe la tarea?
         agregarTarea(tarea, id, false, false)
         LIST.push({
@@ -59,20 +56,22 @@ botonEnter.addEventListener('click',()=> {
 }) 
 
 document.addEventListener('keyup', function(event){
+
     if(event.key=='Enter'){
         const tarea = input.value
         if(tarea) { //existe la tarea?
             agregarTarea(tarea, id, false, false)
+            titulo.textContent = 'Estas son tus tareas pendientes'
             LIST.push({
                 nombre: tarea,
                 id: id,
                 realizado: false,
                 eliminado: false,
             })
-        }
-        localStorage.setItem('TODO',JSON.stringify(LIST))
-        input.value=''
-        id++
+            localStorage.setItem('TODO',JSON.stringify(LIST))
+            input.value=''
+            id++
+        }  
         
     }
 })
@@ -114,10 +113,13 @@ lista.addEventListener('click', function(event){
 
 let data = localStorage.getItem('TODO')
 if(data){
+    titulo.textContent = 'Estas son tus tareas pendientes'
     LIST=JSON.parse(data)
     id=LIST.length
     cargarLista(LIST)
+
 }else{
+    titulo.textContent = 'Sin tareas pendientes'
     LIST = []
     id = 0
 }

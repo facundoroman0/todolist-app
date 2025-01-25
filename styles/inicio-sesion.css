@@ -7,7 +7,7 @@
 :root {
     --white: #fbfaff;
     --black: #1f1f1f;
-    --green: #61e366;
+    --green: #55f35a;
     --light-green: #95eb98;
     --grey: #94a098;
 }
@@ -79,13 +79,17 @@ button{
 
 .button{
     color: var(--black);
-    background-color: var(--green);
+    background-color: var(--light-green);
     border: 2px solid var(--black);
     border-radius: 50px;
     font-size: 1rem;
 }
 
 .button:hover{
-    background-color: var(--light-green);
+    background-color: var(--green);
 }
 
+.animated{
+    transition-property: background-color;
+    transition-duration: 0.5s;
+}

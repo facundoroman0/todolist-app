@@ -10,9 +10,9 @@
     --purple: #9a67ea;
     --blue-light: #04d4d3;
     --blue-dark: #2a73c2;
-    --green: #61e366;
+    --green: #55f35a;
     --light-green: #95eb98;
-    --red: #d5707a;
+    --red: #e75c6a;
     --light-red: #e99ea6;
     --grey: #94a098;
 }
@@ -70,7 +70,7 @@ body{
     width: 100px;
     height: 40px;
     color: var(--black);
-    background-color: var(--green);
+    background-color: var(--light-green);
     border-radius: 50px;
     font-size: 1rem;
     align-self: flex-end;
@@ -78,7 +78,7 @@ body{
 
 .agregar-tarea .boton:hover{
     cursor: pointer;
-    background-color: var(--light-green);
+    background-color: var(--green);
 }
 
 .agregar-tarea input::placeholder{
@@ -129,14 +129,17 @@ body{
 }
 
 button{
+    width: 100px;
+    height: 40px;
     margin: 20px;
     position: absolute;
     top: 0;
     right: 0;
+    font-size: 1rem;
 }
 
 .delete-button{
-    background-color: var(--red);
+    background-color: var(--light-red);
     border: 2px solid var(--black);
     height: 40px;
     padding: 0 10px;
@@ -145,5 +148,11 @@ button{
 }
 
 .delete-button:hover{
-    background-color: var(--light-red);
+    background-color: var(--red);
+    
+}
+
+.animated{
+    transition-property: background-color;
+    transition-duration: 0.5s;
 }
