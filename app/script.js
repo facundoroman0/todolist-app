@@ -28,61 +28,62 @@ fecha.innerHTML = FECHA.toLocaleDateString('es-MX', { weekday: 'long', month: 'l
 
 function agregarTarea(tarea, id, realizado, eliminado) {
 
-    if (eliminado) { return }
+    if (eliminado) return;
 
-    const REALIZADO = realizado ? check : uncheck
-    const LINE = realizado ? lineThrough : ''
+    const REALIZADO = realizado ? check : uncheck;
+    const LINE = realizado ? lineThrough : '';
 
-    const elemento = `<li id="elemento">
-                        <i class="bi ${REALIZADO}" data="realizado" id="${id}"></i>
-                        <p class="text ${LINE}">${tarea}</p>
-                        <i class="bi bi-trash" data="eliminado" id="${id}"></i>
-                      </li>`
-    lista.insertAdjacentHTML("afterbegin", elemento)
+    const elemento = document.createElement('li');
+    elemento.id = 'elemento';
+    elemento.classList.add('slide-in');
+    elemento.innerHTML = `
+        <i class="bi ${REALIZADO}" data="realizado" id="${id}"></i>
+        <p class="text ${LINE}">${tarea}</p>
+        <i class="bi bi-trash" data="eliminado" id="${id}"></i>
+    `;
+    lista.insertBefore(elemento, lista.firstChild);
+
 }
 
 
 botonEnter.addEventListener('click', () => {
-
-    titulo.textContent = 'Estas son tus tareas pendientes'
-
-    const tarea = input.value
+    const tarea = input.value;
 
     if (tarea) {
-        agregarTarea(tarea, id, false, false)
+        agregarTarea(tarea, id, false, false);
         LIST.push({
             nombre: tarea,
             id: id,
             realizado: false,
             eliminado: false,
-        })
+        });
+        localStorage.setItem('TODO', JSON.stringify(LIST));
+        input.value = '';
+        id++;
+        actualizarTitulo(); // Llamada aquí
     }
-    localStorage.setItem('TODO', JSON.stringify(LIST))
-    input.value = ''
-    id++
+});
 
-})
 
 document.addEventListener('keyup', function (event) {
-
     if (event.key == 'Enter') {
-        const tarea = input.value
+        const tarea = input.value;
         if (tarea) {
-            agregarTarea(tarea, id, false, false)
-            titulo.textContent = 'Estas son tus tareas pendientes'
+            agregarTarea(tarea, id, false, false);
             LIST.push({
                 nombre: tarea,
                 id: id,
                 realizado: false,
                 eliminado: false,
-            })
-            localStorage.setItem('TODO', JSON.stringify(LIST))
-            input.value = ''
-            id++
+            });
+            localStorage.setItem('TODO', JSON.stringify(LIST));
+            input.value = '';
+            id++;
+            actualizarTitulo(); // Llamada aquí
         }
-
     }
-})
+});
+
 
 function tareaRealizada(element) {
     element.classList.toggle(check)
@@ -92,8 +93,15 @@ function tareaRealizada(element) {
 }
 
 function tareaEliminada(element) {
-    element.parentNode.parentNode.removeChild(element.parentNode)
-    LIST[element.id].eliminado = true
+    const tarea = element.parentNode;
+    tarea.classList.add('slide-out');
+
+    tarea.addEventListener('animationend', () => {
+        lista.removeChild(tarea);
+        actualizarTitulo(); // Llamada aquí
+    });
+
+    LIST[element.id].eliminado = true;
 }
 
 lista.addEventListener('click', function (event) {
@@ -114,17 +122,26 @@ lista.addEventListener('click', function (event) {
 
 })
 
-let data = localStorage.getItem('TODO')
-if (data) {
-    titulo.textContent = 'Estas son tus tareas pendientes'
-    LIST = JSON.parse(data)
-    id = LIST.length
-    cargarLista(LIST)
+function actualizarTitulo() {
+    const tareasVisibles = lista.querySelectorAll('li').length;
+    if (tareasVisibles === 0) {
+        titulo.textContent = "Sin tareas pendientes";
+    } else {
+        titulo.textContent = "Estas son tus tareas pendientes";
+    }
+}
 
+
+let data = localStorage.getItem('TODO');
+if (data) {
+    LIST = JSON.parse(data);
+    id = LIST.length;
+    cargarLista(LIST);
+    actualizarTitulo(); // Llamada aquí
 } else {
-    titulo.textContent = 'Sin tareas pendientes'
-    LIST = []
-    id = 0
+    LIST = [];
+    id = 0;
+    actualizarTitulo(); // Llamada aquí
 }
 
 function cargarLista(DATA) {
