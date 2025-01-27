@@ -60,7 +60,8 @@ botonEnter.addEventListener('click', () => {
         localStorage.setItem('TODO', JSON.stringify(LIST));
         input.value = '';
         id++;
-        actualizarTitulo(); // Llamada aquí
+        actualizarTitulo();
+        ajustarAlturaLista();
     }
 });
 
@@ -79,10 +80,12 @@ document.addEventListener('keyup', function (event) {
             localStorage.setItem('TODO', JSON.stringify(LIST));
             input.value = '';
             id++;
-            actualizarTitulo(); // Llamada aquí
+            actualizarTitulo();
+            ajustarAlturaLista();
         }
     }
 });
+
 
 
 function tareaRealizada(element) {
@@ -98,11 +101,13 @@ function tareaEliminada(element) {
 
     tarea.addEventListener('animationend', () => {
         lista.removeChild(tarea);
-        actualizarTitulo(); // Llamada aquí
+        actualizarTitulo();
+        ajustarAlturaLista();
     });
 
     LIST[element.id].eliminado = true;
 }
+
 
 lista.addEventListener('click', function (event) {
     const element = event.target
@@ -131,18 +136,27 @@ function actualizarTitulo() {
     }
 }
 
+function ajustarAlturaLista() {
+    const altura = lista.scrollHeight;
+    lista.style.height = `${altura}px`;
+}
+
+
 
 let data = localStorage.getItem('TODO');
 if (data) {
     LIST = JSON.parse(data);
     id = LIST.length;
     cargarLista(LIST);
-    actualizarTitulo(); // Llamada aquí
+    actualizarTitulo();
+    ajustarAlturaLista();
 } else {
     LIST = [];
     id = 0;
-    actualizarTitulo(); // Llamada aquí
+    actualizarTitulo();
+    ajustarAlturaLista();
 }
+
 
 function cargarLista(DATA) {
     DATA.forEach(function (i) {
