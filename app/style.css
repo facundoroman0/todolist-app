@@ -70,16 +70,15 @@ body{
     width: 100px;
     height: 40px;
     color: var(--black);
-    background-color: var(--green);
+    background-color: var(--light-green);
     border-radius: 50px;
     font-size: 1rem;
     align-self: flex-end;
-    transform: scale(1);
-    transition: transform 100ms linear;
+    transition: all 0.1s linear;
 }
 
 .agregar-tarea .boton:hover{
-    transform: scale(1.2);
+    transform: scale(1.05);
     cursor: pointer;
     background-color: var(--green);
 }
@@ -119,16 +118,20 @@ body{
 
 .seccion-tarea i{
     font-size: 25px;
+    transition: all 0.1s linear;
 }
 
 .seccion-tarea i:hover{
     color: var(--green);
     cursor: pointer;
+    transform: scale(1.1);
+    
 }
 
 .seccion-tarea p + i:hover{
     color: var(--red);
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 .line-through{
@@ -153,9 +156,11 @@ button{
     padding: 0 10px;
     border-radius: 50px;
     cursor: pointer;
+    transition: all 0.1s linear;    
 }
 
 .delete-button:hover{
+    transform: scale(1.05);
     background-color: var(--red);
     
 }
