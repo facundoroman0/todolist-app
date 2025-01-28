@@ -91,7 +91,7 @@ body{
 /* S E C C I O N  T A R E A */
 #lista {
     overflow: hidden;
-    transition: height 1s linear;
+    transition: all .2s linear;
 }
 
 .seccion-tarea h3{
@@ -166,7 +166,7 @@ button{
 }
 
 .slide-in {
-    animation: slideIn 0.3s ease-out forwards;
+    animation: slideIn 0.1s linear forwards;
 }
 
 @keyframes slideIn {
@@ -182,7 +182,7 @@ button{
 
 
 .slide-out {
-    animation: slideOut 0.3s ease-in forwards;
+    animation: slideOut 0.1s linear forwards;
 }
 
 @keyframes slideOut {
